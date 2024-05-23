@@ -5,8 +5,10 @@ import empre.rubik.api.dto.dtoResposta.CadastroRespostaDto;
 import empre.rubik.api.dto.dtoResposta.DetalharRespostaDto;
 import empre.rubik.api.entites.Resposta;
 import empre.rubik.api.repository.RespostaRepository;
+import empre.rubik.api.services.ServiceResposta;
 import jakarta.annotation.Resources;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +18,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("respostas")
 public class RespostaResource {
     @Autowired
-    RespostaRepository respostaRepository;
+    ServiceResposta serviceResposta;
     @PostMapping
-
-    public ResponseEntity inserir(@RequestBody CadastroRespostaDto resposta, UriComponentsBuilder builde){
-        Resposta r=new Resposta(resposta);
-        respostaRepository.save(r);
+    public ResponseEntity inserir(@RequestBody @Valid CadastroRespostaDto resposta, UriComponentsBuilder builde){
+        var r =serviceResposta.save(resposta);
         var uri= builde.path("/respostas/{id}").buildAndExpand(r.getId()).toUri();
         return  ResponseEntity.created(uri).body(new DetalharRespostaDto(r));
 

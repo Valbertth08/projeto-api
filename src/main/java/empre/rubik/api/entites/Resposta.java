@@ -1,19 +1,25 @@
 package empre.rubik.api.entites;
 
+import empre.rubik.api.dto.dtoPergunta.PerguntaCadastroDto;
 import empre.rubik.api.dto.dtoResposta.CadastroRespostaDto;
+import empre.rubik.api.repository.EmpresaRepository;
+import empre.rubik.api.repository.PerguntaRepository;
+import empre.rubik.api.repository.RespostaRepository;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 
-@Entity(name = "Resposta")
-@Table(name = "tb_resposta")
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Resposta{
+@Entity(name = "Resposta")
+@Table(name = "tb_resposta")
+public class Resposta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,11 +32,4 @@ public class Resposta{
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-
-    public Resposta(CadastroRespostaDto cadastro){
-        this.id=cadastro.id();
-        this.empresa=cadastro.empresa();
-        this.texto=cadastro.texto();
-        this.pergunta=cadastro.pergunta();
-    }
 }

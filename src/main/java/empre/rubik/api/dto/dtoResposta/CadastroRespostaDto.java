@@ -7,12 +7,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CadastroRespostaDto(
-        @NotNull
-        Long id,
         @NotBlank
         String texto,
         @NotNull
-        Pergunta pergunta,
+        Long  id_pergunta,
         @NotNull
-        Empresa empresa) {
+        Long id_empresa) {
 }
