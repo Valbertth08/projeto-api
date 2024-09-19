@@ -1,0 +1,1 @@
+ALTER TABLE tb_pergunta DROP COLUMN tipo_pergunta;

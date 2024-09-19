@@ -1,0 +1,2 @@
+ALTER TABLE tb_pergunta
+MODIFY COLUMN texto VARCHAR(250);
